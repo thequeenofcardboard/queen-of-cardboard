@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Queen of Cardboard Collectibles</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#C9A84C;--gold-light:#E8C46A;--gold-dark:#9A7A2E;--black:#0A0A0A;--charcoal:#141414;--card-bg:#1A1A1A;--border:#2E2E2E;--text:#F5F0E8;--text-muted:#A0998A;--font-d:'Cinzel',serif;--font-b:'Lato',sans-serif}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.6;min-height:100vh}
+  a{color:var(--gold);text-decoration:none} a:hover{color:var(--gold-light)}
+  img{max-width:100%;display:block}
+  .hidden{display:none!important}
+  .section-title{font-family:var(--font-d);font-size:clamp(1.4rem,3vw,2rem);color:var(--gold);letter-spacing:.08em;text-align:center;margin-bottom:.4rem}
+  .section-sub{text-align:center;color:var(--text-muted);font-size:.9rem;letter-spacing:.05em;margin-bottom:2.5rem}
+  .divider{width:80px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:.75rem auto 1.5rem}
+  .btn{display:inline-block;font-family:var(--font-d);font-size:.8rem;letter-spacing:.12em;padding:.75rem 2rem;border:1px solid var(--gold);color:var(--gold);background:transparent;cursor:pointer;transition:all .25s;text-transform:uppercase}
+  .btn:hover{background:var(--gold);color:var(--black)}
+  .btn-solid{background:var(--gold);color:var(--black)}
+  .btn-solid:hover{background:var(--gold-light)}
+  .btn-sm{padding:.5rem 1.2rem;font-size:.65rem}
+  .btn-danger{border-color:#7A3030;color:#E07070}
+  .btn-danger:hover{background:#7A3030;color:#fff}
+
+  /* ── HEADER ─────────────────────────────────────── */
+  header{position:sticky;top:0;z-index:100;background:rgba(10,10,10,.97);border-bottom:1px solid var(--border);padding:0 2rem}
+  nav{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:70px;gap:1rem}
+  .nav-logo{font-family:var(--font-d);font-size:clamp(.8rem,2vw,1rem);font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;line-height:1.2;white-space:nowrap}
+  .nav-logo span{display:block;font-size:.65em;font-weight:400;color:var(--text-muted);letter-spacing:.2em}
+  .nav-links{display:flex;gap:1.6rem;list-style:none;font-family:var(--font-d);font-size:.65rem;letter-spacing:.15em;text-transform:uppercase}
+  .nav-links a{color:var(--text-muted);transition:color .2s} .nav-links a:hover{color:var(--gold)}
+  .nav-right{display:flex;align-items:center;gap:.75rem}
+  .cart-btn{position:relative;background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--gold);padding:.4rem}
+  .cart-count{position:absolute;top:-2px;right:-4px;background:var(--gold);color:var(--black);font-size:.6rem;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .nav-account-btn{font-family:var(--font-d);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.45rem 1rem;border:1px solid var(--gold-dark);color:var(--gold);background:transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
+  .nav-account-btn:hover{background:var(--gold);color:var(--black)}
+  .owner-bar{background:linear-gradient(135deg,#1a1000,#0d0d0d);border-bottom:2px solid var(--gold);padding:.6rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+  .owner-bar-label{font-family:var(--font-d);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .owner-bar-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;color:var(--gold);font-size:1.5rem}
+  @media(max-width:800px){.nav-links{display:none;position:absolute;top:70px;left:0;right:0;background:var(--charcoal);flex-direction:column;padding:1rem 2rem;gap:1rem;border-bottom:1px solid var(--border);z-index:99}.nav-links.open{display:flex}.hamburger{display:block}}
+
+  /* ── HERO ───────────────────────────────────────── */
+  .hero{min-height:88vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 60%,#1a1500 0%,var(--black) 70%)}
+  .hero::before{content:'♛';position:absolute;font-size:40vw;color:rgba(201,168,76,.035);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;user-select:none;line-height:1}
+  .hero h1{font-family:var(--font-d);font-size:clamp(2rem,7vw,5rem);font-weight:900;line-height:1.05;letter-spacing:.06em;text-transform:uppercase;color:var(--text);margin-bottom:.5rem}
+  .hero h1 em{font-style:normal;color:var(--gold);display:block}
+  .hero-sub{font-size:clamp(.85rem,2vw,1.05rem);color:var(--text-muted);letter-spacing:.08em;margin:1.5rem 0 2.5rem;max-width:560px;line-height:1.7}
+  .hero-pills{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-top:2rem}
+  .hero-pill{font-family:var(--font-d);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dark);border:1px solid #2a2000;padding:.35rem .9rem;background:rgba(201,168,76,.05)}
+
+  /* ── TRUST STRIP ────────────────────────────────── */
+  .trust-strip{background:var(--gold);padding:.75rem 2rem}
+  .trust-strip-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap}
+  .trust-item{font-family:var(--font-d);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--black);display:flex;align-items:center;gap:.5rem}
+
+  /* ── ABOUT ──────────────────────────────────────── */
+  #about{padding:6rem 2rem;border-top:1px solid var(--border)}
+  .about-inner{max-width:1100px;margin:0 auto}
+  .about-story{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-bottom:5rem}
+  @media(max-width:720px){.about-story{grid-template-columns:1fr;gap:2rem}}
+  .about-story-text h2{font-family:var(--font-d);font-size:clamp(1.3rem,3vw,1.9rem);color:var(--gold);letter-spacing:.07em;margin-bottom:1rem;line-height:1.25}
+  .about-story-text p{color:var(--text-muted);font-size:.95rem;line-height:1.8;margin-bottom:1rem}
+  .about-story-text p strong{color:var(--text)}
+  .about-stat-box{border:1px solid var(--border);padding:2rem;display:flex;flex-direction:column;gap:1.5rem}
+  .stat-row{text-align:center;padding-bottom:1.5rem;border-bottom:1px solid var(--border)}
+  .stat-row:last-child{border-bottom:none;padding-bottom:0}
+  .stat-num{font-family:var(--font-d);font-size:2.8rem;color:var(--gold);line-height:1;font-weight:900}
+  .stat-label{font-family:var(--font-d);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-top:.3rem}
+  .about-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+  .pillar{background:var(--card-bg);border:1px solid var(--border);padding:1.5rem;text-align:center;transition:border-color .2s}
+  .pillar:hover{border-color:var(--gold-dark)}
+  .pillar-icon{font-size:1.8rem;margin-bottom:.75rem;display:block}
+  .pillar h4{font-family:var(--font-d);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+  .pillar p{font-size:.82rem;color:var(--text-muted);line-height:1.6}
+
+  /* ── SHIPPING ───────────────────────────────────── */
+  #shipping-info{background:var(--charcoal);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:3rem 2rem}
+  .shipping-inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem}
+  .shipping-card{border:1px solid var(--border);padding:1.5rem;text-align:center}
+  .s-icon{font-size:2rem;color:var(--gold);display:block;margin-bottom:.75rem}
+  .shipping-card h4{font-family:var(--font-d);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
+  .shipping-card p{font-size:.85rem;color:var(--text-muted);line-height:1.6}
+  .highlight{color:var(--text);font-weight:700}
+
+  /* ── CATEGORIES ─────────────────────────────────── */
+  #categories{padding:5rem 2rem}
+  .categories-inner{max-width:1100px;margin:0 auto}
+  .cat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:2.5rem}
+  .cat-card{background:var(--card-bg);border:1px solid var(--border);padding:2rem 1rem;text-align:center;cursor:pointer;transition:border-color .25s,transform .25s}
+  .cat-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .cat-icon{font-size:2.2rem;margin-bottom:.75rem;display:block}
+  .cat-card h3{font-family:var(--font-d);font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;line-height:1.35}
+  .cat-card p{font-size:.78rem;color:var(--text-muted);line-height:1.5}
+
+  /* ── SHOP ───────────────────────────────────────── */
+  #shop{padding:5rem 2rem;border-top:1px solid var(--border)}
+  .shop-inner{max-width:1200px;margin:0 auto}
+  .browse-notice{background:#1A1500;border:1px solid var(--gold-dark);padding:1rem 1.5rem;text-align:center;margin-bottom:2.5rem}
+  .browse-notice p{font-size:.85rem;color:var(--gold-light);line-height:1.6}
+  .browse-notice a{color:var(--gold);text-decoration:underline;text-underline-offset:3px}
+  .category-tabs{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+  .tab-btn{font-family:var(--font-d);font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;padding:.6rem 1.2rem;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s}
+  .tab-btn:hover{border-color:var(--gold-dark);color:var(--gold)}
+  .tab-btn.active{border-color:var(--gold);background:var(--gold);color:var(--black)}
+  .product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem}
+  .product-card{background:var(--card-bg);border:1px solid var(--border);display:flex;flex-direction:column;transition:border-color .25s,transform .25s;position:relative}
+  .product-card:hover{border-color:var(--gold-dark);transform:translateY(-3px)}
+  .product-img-placeholder{width:100%;aspect-ratio:4/3;background:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem;color:var(--border);font-size:.75rem;font-family:var(--font-d);letter-spacing:.1em;border-bottom:1px solid var(--border)}
+  .product-img-placeholder span{font-size:2.5rem;opacity:.3}
+  .product-img{width:100%;aspect-ratio:4/3;object-fit:cover;background:#111;border-bottom:1px solid var(--border)}
+  .product-body{padding:1.25rem;display:flex;flex-direction:column;flex:1}
+  .product-category{font-family:var(--font-d);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+  .product-name{font-family:var(--font-d);font-size:.88rem;font-weight:600;color:var(--text);line-height:1.35;margin-bottom:.75rem;flex:1}
+  .product-desc{font-size:.82rem;color:var(--text-muted);line-height:1.55;margin-bottom:1rem}
+  .product-footer{display:flex;align-items:center;justify-content:space-between;gap:.75rem;margin-top:auto;padding-top:1rem;border-top:1px solid var(--border)}
+  .product-price{font-family:var(--font-d);font-size:1.1rem;color:var(--gold)}
+  .product-price small{display:block;font-size:.58rem;letter-spacing:.15em;color:var(--text-muted);font-weight:400;margin-bottom:.1rem}
+  .add-to-cart{font-family:var(--font-d);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.6rem 1rem;border:1px solid var(--gold);background:transparent;color:var(--gold);cursor:pointer;transition:all .2s;white-space:nowrap}
+  .add-to-cart:hover{background:var(--gold);color:var(--black)}
+  .add-to-cart.locked{border-color:var(--border);color:var(--text-muted)}
+  .add-to-cart.locked:hover{background:var(--gold-dark);border-color:var(--gold-dark);color:var(--black)}
+  .badge-new{position:absolute;top:10px;left:10px;background:var(--gold);color:var(--black);font-family:var(--font-d);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .6rem}
+  .badge-sold{position:absolute;top:10px;right:10px;background:#3A1A1A;border:1px solid #7A3030;color:#E07070;font-family:var(--font-d);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .6rem}
+  .owner-edit-btn{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.9);border-top:1px solid var(--gold-dark);color:var(--gold);font-family:var(--font-d);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.5rem;cursor:pointer;transition:opacity .2s;z-index:5;width:100%;text-align:center;opacity:0}
+  .product-card:hover .owner-edit-btn{opacity:1}
+
+  /* ── SOCIAL CONNECT BUTTONS ─────────────────────── */
+  .social-connect-grid{display:flex;flex-direction:column;gap:.75rem;margin:1.25rem 0}
+  .social-btn{display:flex;align-items:center;gap:.9rem;padding:.85rem 1.2rem;border:1px solid var(--border);background:#0E0E0E;cursor:pointer;transition:all .2s;width:100%;text-align:left;font-family:var(--font-b);font-size:.9rem;color:var(--text)}
+  .social-btn:hover{transform:translateX(4px)}
+  .social-btn.tiktok:hover{border-color:#69C9D0;background:rgba(105,201,208,.08)}
+  .social-btn.instagram:hover{border-color:#E1306C;background:rgba(225,48,108,.08)}
+  .social-btn.facebook:hover{border-color:#1877F2;background:rgba(24,119,242,.08)}
+  .social-btn.whatnot:hover{border-color:#7C3AED;background:rgba(124,58,237,.08)}
+  .social-btn-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+  .tiktok .social-btn-icon{background:linear-gradient(135deg,#010101,#69C9D0)}
+  .instagram .social-btn-icon{background:linear-gradient(135deg,#405DE6,#833AB4,#E1306C,#FD1D1D,#F77737)}
+  .facebook .social-btn-icon{background:#1877F2}
+  .whatnot .social-btn-icon{background:#7C3AED}
+  .social-btn-text{flex:1}
+  .social-btn-title{font-weight:700;font-size:.88rem;line-height:1.2}
+  .social-btn-sub{font-size:.72rem;color:var(--text-muted);margin-top:.15rem}
+  .social-btn-status{font-family:var(--font-d);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2px;flex-shrink:0}
+  .status-connect{color:var(--gold);border:1px solid var(--gold-dark)}
+  .status-pending{color:#F0C060;border:1px solid #6A5010;background:rgba(240,192,96,.08)}
+  .status-verified{color:#7EC87E;border:1px solid #2A5A2A;background:rgba(126,200,126,.08)}
+  .connect-divider{display:flex;align-items:center;gap:1rem;margin:.5rem 0}
+  .connect-divider span{font-size:.7rem;color:var(--text-muted);white-space:nowrap;font-family:var(--font-d);letter-spacing:.15em;text-transform:uppercase}
+  .connect-divider::before,.connect-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+  .whatnot-form{display:none;flex-direction:column;gap:.75rem;background:#111;border:1px solid var(--border);padding:1.25rem;margin-top:-.5rem}
+  .whatnot-form.open{display:flex}
+  .whatnot-form input{background:#0A0A0A;border:1px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:.9rem;padding:.65rem .9rem;outline:none;transition:border-color .2s}
+  .whatnot-form input:focus{border-color:#7C3AED}
+  .verify-status-box{border:1px solid;padding:1rem 1.25rem;margin:1rem 0;font-size:.88rem;line-height:1.6;border-radius:2px}
+  .verify-status-box.pending{border-color:#6A5010;background:rgba(240,192,96,.07);color:#F0C060}
+  .verify-status-box.verified{border-color:#2A5A2A;background:rgba(126,200,126,.07);color:#7EC87E}
+  .verify-status-box.error{border-color:#7A3030;background:rgba(225,48,108,.07);color:#E07070}
+
+  /* ── MODALS ─────────────────────────────────────── */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;display:none;align-items:center;justify-content:center;padding:1rem}
+  .modal-overlay.open{display:flex}
+  .modal-box{background:var(--charcoal);border:1px solid var(--gold-dark);max-width:560px;width:100%;max-height:92vh;overflow-y:auto}
+  .modal-box.wide{max-width:760px}
+  .modal-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--charcoal);z-index:1}
+  .modal-header h2{font-family:var(--font-d);font-size:1rem;letter-spacing:.1em;color:var(--gold)}
+  .modal-body{padding:1.75rem}
+  .modal-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1.75rem}
+  .modal-tab{flex:1;font-family:var(--font-d);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.75rem .5rem;background:none;border:none;color:var(--text-muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+  .modal-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+  .modal-section{display:none}
+  .modal-section.active{display:block}
+  .form-group{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+  .form-group label{font-family:var(--font-d);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .form-group input,.form-group select,.form-group textarea{background:#0E0E0E;border:1px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:.95rem;padding:.75rem 1rem;outline:none;transition:border-color .2s;-webkit-appearance:none;width:100%}
+  .form-group input:focus,.form-group select:focus{border-color:var(--gold)}
+  .form-group select option{background:var(--charcoal)}
+  .form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+  @media(max-width:560px){.form-grid-2{grid-template-columns:1fr}}
+  .gate-error{color:#E07070;font-size:.83rem;display:none;margin:.5rem 0}
+  .gate-success-msg{text-align:center;padding:1rem 0}
+  .gate-success-msg .big-icon{font-size:2.5rem;display:block;margin-bottom:.75rem}
+  .gate-success-msg h3{font-family:var(--font-d);color:var(--gold);font-size:1.1rem;margin-bottom:.5rem}
+  .gate-success-msg p{font-size:.88rem;color:var(--text-muted);line-height:1.6}
+  .modal-note{font-size:.78rem;color:var(--text-muted);line-height:1.6;margin-top:1.25rem;text-align:center}
+  .stripe-badge{display:flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--font-d);font-size:.58rem;letter-spacing:.15em;color:var(--text-muted);margin-top:1rem}
+  /* OWNER EDIT */
+  .img-preview{width:100%;aspect-ratio:16/9;background:#111;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:.85rem;text-align:center;overflow:hidden;margin-bottom:.75rem}
+  .img-preview img{width:100%;height:100%;object-fit:cover}
+  .toggle-row{display:flex;align-items:center;gap:1rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+  .toggle-label{font-family:var(--font-d);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);flex:1}
+  .toggle{position:relative;width:46px;height:24px;flex-shrink:0}
+  .toggle input{opacity:0;width:0;height:0;position:absolute}
+  .toggle-slider{position:absolute;inset:0;background:#2E2E2E;border-radius:24px;cursor:pointer;transition:.3s}
+  .toggle-slider::before{content:'';position:absolute;width:18px;height:18px;background:#888;border-radius:50%;bottom:3px;left:3px;transition:.3s}
+  .toggle input:checked+.toggle-slider{background:var(--gold-dark)}
+  .toggle input:checked+.toggle-slider::before{background:var(--gold);transform:translateX(22px)}
+  .product-list-admin{display:flex;flex-direction:column;gap:.6rem;max-height:360px;overflow-y:auto;margin-bottom:1rem}
+  .product-list-item{display:flex;align-items:center;gap:.75rem;padding:.75rem;background:#111;border:1px solid var(--border);cursor:pointer;transition:border-color .2s}
+  .product-list-item:hover{border-color:var(--gold-dark)}
+  .pli-img{width:52px;height:52px;background:#1a1a1a;border:1px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;overflow:hidden}
+  .pli-img img{width:100%;height:100%;object-fit:cover}
+  .pli-info{flex:1;min-width:0}
+  .pli-name{font-size:.82rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--font-d)}
+  .pli-meta{font-size:.72rem;color:var(--text-muted);margin-top:.2rem}
+  /* CART */
+  .cart-overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;display:none}
+  .cart-overlay-bg.open{display:block}
+  .cart-drawer{position:fixed;top:0;right:0;bottom:0;width:min(420px,100vw);background:var(--charcoal);border-left:1px solid var(--border);z-index:201;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column}
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-header{padding:1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .cart-header h3{font-family:var(--font-d);font-size:.85rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+  .close-btn{background:none;border:none;color:var(--text-muted);font-size:1.5rem;cursor:pointer;line-height:1;transition:color .2s}
+  .close-btn:hover{color:var(--text)}
+  .cart-items-wrap{flex:1;overflow-y:auto;padding:1rem 1.5rem}
+  .cart-empty{text-align:center;color:var(--text-muted);font-size:.9rem;padding:3rem 0}
+  .cart-empty span{display:block;font-size:2rem;margin-bottom:.5rem;opacity:.4}
+  .cart-item{display:flex;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+  .cart-item-info{flex:1}
+  .cart-item-name{font-family:var(--font-d);font-size:.78rem;color:var(--text);line-height:1.3;margin-bottom:.3rem}
+  .cart-item-price{font-size:.85rem;color:var(--gold)}
+  .cart-item-qty{display:flex;align-items:center;gap:.5rem;margin-top:.5rem}
+  .qty-btn{background:var(--border);border:none;color:var(--text);width:22px;height:22px;cursor:pointer;font-size:1rem;line-height:1;transition:background .2s}
+  .qty-btn:hover{background:var(--gold);color:var(--black)}
+  .qty-display{font-size:.85rem;min-width:20px;text-align:center}
+  .remove-item{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:.9rem;padding:0;transition:color .2s}
+  .remove-item:hover{color:#E07070}
+  .cart-footer{padding:1.5rem;border-top:1px solid var(--border)}
+  .cart-shipping-note{background:#1A1500;border:1px solid var(--gold-dark);padding:.6rem 1rem;font-size:.78rem;color:var(--gold-light);margin-bottom:1rem;text-align:center;line-height:1.5}
+  .cart-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.2rem}
+  .cart-total-row span:first-child{font-family:var(--font-d);font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+  .cart-total-amount{font-family:var(--font-d);font-size:1.3rem;color:var(--gold)}
+  .checkout-note{font-size:.75rem;color:var(--text-muted);text-align:center;margin-top:.8rem;line-height:1.5}
+  .stripe-info{display:flex;align-items:center;justify-content:center;gap:.4rem;font-size:.72rem;color:var(--text-muted);margin-top:.6rem}
+  /* FOOTER */
+  footer{padding:3.5rem 2rem;border-top:1px solid var(--border);text-align:center}
+  .footer-logo{font-family:var(--font-d);font-size:.9rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:.4rem}
+  .footer-sub{font-size:.75rem;color:var(--text-muted);letter-spacing:.1em;margin-bottom:1.5rem}
+  .footer-links{display:flex;gap:1.5rem;justify-content:center;list-style:none;font-family:var(--font-d);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.25rem;flex-wrap:wrap}
+  .footer-links a{color:var(--text-muted)} .footer-links a:hover{color:var(--gold)}
+  .footer-contact{margin:1rem 0 1.5rem}
+  .footer-contact-label{font-family:var(--font-d);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+  .footer-contact a{font-size:.88rem;color:var(--text-muted);transition:color .2s}
+  .footer-contact a:hover{color:var(--gold)}
+  .footer-copy{font-size:.72rem;color:#3A3A3A}
+  /* TOAST */
+  .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--gold);color:var(--black);font-family:var(--font-d);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;padding:.75rem 1.75rem;z-index:600;transition:transform .3s;white-space:nowrap;max-width:90vw;text-align:center}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     SITE DATA
+     ============================================================ -->
+<script>
+/* ── OWNER PASSWORD (set via env var in production) ── */
+const OWNER_PASSWORD  = "QueenOfCards2025!";
+const ACCESS_CODE     = "QUEEN2025";
+
+const DEFAULT_PRODUCTS = [
+  {id:"poke-01",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes Elite Trainer Box",desc:"9 booster packs, exclusive promo card, dice, sleeves, and collector accessories.",price:null,image:"",badge:"New",inStock:true},
+  {id:"poke-02",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes Sealed Mini Tin Display",desc:"Full sealed display of Ascended Heroes Mini Tins.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-03",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes Booster Bundle",desc:"Multi-pack booster bundle from the Ascended Heroes expansion.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-04",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes Poster Collection – Gardevoir",desc:"Gardevoir poster collection with exclusive booster packs.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-05",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes Poster Collection – Lucario",desc:"Lucario-themed poster collection with exclusive booster packs.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-06",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes Deluxe Pin Collection",desc:"Premium enamel pin collection paired with booster packs.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-07",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes 3 Pack Sticker Collection",desc:"Three-pack sticker collection with exclusive sticker sheet.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-08",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Ascended Heroes 2 Pack Blister",desc:"Two booster packs with exclusive promo card in sealed blister.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-09",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Phantasmal Flames Elite Trainer Box",desc:"Elite Trainer Box from the Phantasmal Flames expansion.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-10",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Phantasmal Flames Booster Bundle",desc:"Booster bundle from the Phantasmal Flames expansion.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-11",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Phantasmal Flames 3 Pack Sticker Collection",desc:"Three-pack sticker collection from the Phantasmal Flames set.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-12",category:"pokemon",name:"Pokémon TCG: Mega Evolution Elite Trainer Box – Gardevoir",desc:"Gardevoir-themed Elite Trainer Box with exclusive art and accessories.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-13",category:"pokemon",name:"Pokémon TCG: Mega Evolution Booster Bundle",desc:"Core set booster bundle from the Mega Evolution series.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-14",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Chaos Rising Elite Trainer Box",desc:"9 Chaos Rising booster packs with promo card and accessories.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-15",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Chaos Rising Booster Bundle",desc:"Booster bundle from the Chaos Rising expansion.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-16",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Chaos Rising Booster Box",desc:"Full sealed booster box — 36 packs. Ideal for breakers.",price:null,image:"",badge:"Hot",inStock:true},
+  {id:"poke-17",category:"pokemon",name:"Pokémon TCG: Mega Charizard X ex Ultra-Premium Collection Box",desc:"Ultra-premium collection featuring Mega Charizard X ex.",price:null,image:"",badge:"Hot",inStock:true},
+  {id:"poke-18",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Perfect Order Elite Trainer Box",desc:"Perfect Order ETB with 9 packs and premium accessories.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-19",category:"pokemon",name:"Pokémon TCG: Mega Evolution – Perfect Order Booster Bundle",desc:"Booster bundle from the Perfect Order expansion.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-20",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Prismatic Evolution Elite Trainer Box",desc:"Elite Trainer Box from the Prismatic Evolution expansion.",price:null,image:"",badge:"New",inStock:true},
+  {id:"poke-21",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Prismatic Evolution Booster Bundle",desc:"Multi-pack booster bundle from Prismatic Evolution.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-22",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Prismatic Evolution Binder Collection",desc:"Collector binder with exclusive promo cards and booster packs.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-23",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Prismatic Evolution Poster Collection",desc:"Poster collection set with art prints and booster packs.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-24",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Prismatic Evolution Figure Collection",desc:"Figure collection featuring exclusive Pokémon figure and packs.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-25",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Prismatic Evolution Super Premium Collection",desc:"The ultimate Prismatic Evolution collection with premium accessories.",price:null,image:"",badge:"Hot",inStock:true},
+  {id:"poke-26",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – 151 Booster Bundle",desc:"The beloved 151 set — multi-pack booster bundle.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-27",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – 151 Poster Collection",desc:"Poster collection from the fan-favorite Scarlet & Violet 151 set.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-28",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Destined Rivals Elite Trainer Box",desc:"Elite Trainer Box from the Destined Rivals expansion.",price:null,image:"",badge:"New",inStock:true},
+  {id:"poke-29",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – Destined Rivals Booster Bundle",desc:"Booster bundle from the Destined Rivals expansion.",price:null,image:"",badge:"",inStock:true},
+  {id:"poke-30",category:"pokemon",name:"Pokémon TCG: Scarlet & Violet – White Flare Elite Trainer Box",desc:"Elite Trainer Box from the White Flare expansion.",price:null,image:"",badge:"New",inStock:true},
+  {id:"sport-01",category:"sports",name:"2024 NFL Panini Donruss Optic Football Blaster – Purple Shock Parallels",desc:"Blaster box with Purple Shock parallel cards from the 2024 NFL season.",price:null,image:"",badge:"",inStock:true},
+  {id:"sport-02",category:"sports",name:"2024 NFL Panini Donruss Optic Football Blaster – Pink Parallels",desc:"Pink Parallel blaster box. Great for parallel run breakers.",price:null,image:"",badge:"",inStock:true},
+  {id:"sport-03",category:"sports",name:"2024 NFL Panini Donruss Optic Football Mega Box – Green Hyper Parallels",desc:"Mega box with exclusive Green Hyper Parallel inserts.",price:null,image:"",badge:"",inStock:true},
+  {id:"sport-04",category:"sports",name:"2024 NFL Panini Donruss Optic Football Mega Box – Blue Hyper Parallels",desc:"Blue Hyper Parallel Mega Box — a breaker favorite.",price:null,image:"",badge:"",inStock:true},
+  {id:"sport-05",category:"sports",name:"2024 NFL Panini Donruss Optic Football Hobby Mega Box – Red Hyper Parallels",desc:"Hobby Mega Box with exclusive Red Hyper Parallels.",price:null,image:"",badge:"Hot",inStock:true},
+  {id:"mtg-01",category:"mtg",name:"Magic: The Gathering – Coming Soon",desc:"MTG booster boxes, set booster displays, and collector boosters.",price:null,image:"",badge:"",inStock:false},
+  {id:"op-01",category:"onepiece",name:"One Piece TCG – Coming Soon",desc:"One Piece Trading Card Game booster boxes and sealed sets.",price:null,image:"",badge:"",inStock:false},
+  {id:"other-01",category:"other",name:"Other Collectibles – Coming Soon",desc:"Additional collectibles and specialty items. Check back soon.",price:null,image:"",badge:"",inStock:false}
+];
+
+const CATEGORY_LABELS={all:"All Products",pokemon:"Pokémon TCG",sports:"Sports Cards",mtg:"Magic: The Gathering",onepiece:"One Piece TCG",other:"Other Collectibles"};
+</script>
+
+<!-- ============================================================
+     OWNER LOGIN MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="owner-login-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>♛ Owner Login</h2>
+      <button class="close-btn" onclick="document.getElementById('owner-login-modal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;font-size:2.5rem;color:var(--gold);margin-bottom:1rem">♛</div>
+      <div class="form-group">
+        <label for="owner-pw">Owner Password</label>
+        <input type="password" id="owner-pw" placeholder="Enter owner password" onkeydown="if(event.key==='Enter')ownerLogin()">
+      </div>
+      <p id="owner-pw-error" class="gate-error">❌ Incorrect password.</p>
+      <button class="btn btn-solid" style="width:100%" onclick="ownerLogin()">Sign In as Owner ♛</button>
+      <p class="modal-note">Owner-only access. Buyer verification uses a separate system below.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     OWNER: EDIT / ADD PRODUCT MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="edit-product-modal">
+  <div class="modal-box wide">
+    <div class="modal-header">
+      <h2 id="edit-modal-title">♛ Edit Product</h2>
+      <button class="close-btn" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div>
+          <div class="form-group"><label>Product Name</label><input type="text" id="ep-name" placeholder="Full product name"></div>
+          <div class="form-group"><label>Category</label>
+            <select id="ep-cat">
+              <option value="pokemon">Pokémon TCG</option>
+              <option value="sports">Sports Cards</option>
+              <option value="mtg">Magic: The Gathering</option>
+              <option value="onepiece">One Piece TCG</option>
+              <option value="other">Other Collectibles</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Price (blank = "Contact for Pricing")</label><input type="number" id="ep-price" placeholder="e.g. 49.99" step="0.01" min="0"></div>
+          <div class="form-group"><label>Badge</label>
+            <select id="ep-badge"><option value="">None</option><option value="New">New</option><option value="Hot">Hot</option><option value="Sale">Sale</option></select>
+          </div>
+          <div class="toggle-row"><span class="toggle-label">In Stock</span><label class="toggle"><input type="checkbox" id="ep-instock" checked><span class="toggle-slider"></span></label></div>
+        </div>
+        <div>
+          <div class="form-group"><label>Product Description</label><textarea id="ep-desc" rows="4" placeholder="Short description" style="resize:vertical"></textarea></div>
+          <div class="form-group">
+            <label>Product Image</label>
+            <div class="img-preview" id="ep-img-preview"><span style="opacity:.4">♛</span>&nbsp;No image yet</div>
+            <input type="file" id="ep-img-file" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem">
+              <button class="btn btn-sm" onclick="document.getElementById('ep-img-file').click()">📷 Upload Photo</button>
+              <button class="btn btn-sm" onclick="pasteImageUrl()">🔗 Paste URL</button>
+              <button class="btn btn-sm btn-danger" onclick="clearImage()">✕ Remove</button>
+            </div>
+            <input type="hidden" id="ep-image-data">
+          </div>
+        </div>
+      </div>
+      <p id="ep-error" class="gate-error"></p>
+      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
+        <button class="btn btn-solid" style="flex:1" onclick="saveProduct()">Save Product ♛</button>
+        <button class="btn btn-danger btn-sm" id="ep-delete-btn" onclick="deleteProduct()" style="display:none">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     OWNER: MANAGE ALL PRODUCTS MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="manage-modal">
+  <div class="modal-box wide">
+    <div class="modal-header">
+      <h2>♛ Manage All Products</h2>
+      <button class="close-btn" onclick="document.getElementById('manage-modal').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;gap:.5rem;margin-bottom:1rem;flex-wrap:wrap">
+        <input type="text" id="manage-search" placeholder="Search products..." style="flex:1;background:#0E0E0E;border:1px solid var(--border);color:var(--text);padding:.6rem .9rem;font-family:var(--font-b);font-size:.9rem;outline:none" oninput="renderManageList()">
+        <button class="btn btn-solid btn-sm" onclick="openAddProduct()">+ Add New Product</button>
+      </div>
+      <div class="product-list-admin" id="manage-product-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     BUYER: ACCOUNT / VERIFY MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="account-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>♛ Breaker / Buyer Access</h2>
+      <button class="close-btn" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tabs" id="modal-tabs">
+        <button class="modal-tab active" onclick="switchModalTab('connect',this)">Connect &amp; Verify</button>
+        <button class="modal-tab" onclick="switchModalTab('code',this)">Enter Access Code</button>
+      </div>
+
+      <!-- CONNECT YOUR ACCOUNTS -->
+      <div id="modal-connect" class="modal-section active">
+        <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.25rem">Connect your streaming platform(s) below to submit a verification request. The Queen of Cardboard will review your profile and send your access code within 1–2 business days.</p>
+
+        <!-- Status box (shown after redirect back from OAuth) -->
+        <div id="connect-status-box" style="display:none"></div>
+
+        <div class="form-group">
+          <label for="buyer-name-connect">Your Name</label>
+          <input type="text" id="buyer-name-connect" placeholder="Your full name">
+        </div>
+        <div class="form-group">
+          <label for="buyer-email-connect">Email Address</label>
+          <input type="email" id="buyer-email-connect" placeholder="your@email.com">
+        </div>
+
+        <div class="social-connect-grid">
+          <!-- TikTok -->
+          <button class="social-btn tiktok" onclick="connectTikTok()">
+            <div class="social-btn-icon">🎵</div>
+            <div class="social-btn-text">
+              <div class="social-btn-title">TikTok Live</div>
+              <div class="social-btn-sub">Connect your TikTok account</div>
+            </div>
+            <span class="social-btn-status status-connect" id="tiktok-status">Connect</span>
+          </button>
+
+          <!-- Instagram -->
+          <button class="social-btn instagram" onclick="connectMeta('instagram')">
+            <div class="social-btn-icon">📸</div>
+            <div class="social-btn-text">
+              <div class="social-btn-title">Instagram Live</div>
+              <div class="social-btn-sub">Connect your Instagram account</div>
+            </div>
+            <span class="social-btn-status status-connect" id="instagram-status">Connect</span>
+          </button>
+
+          <!-- Facebook -->
+          <button class="social-btn facebook" onclick="connectMeta('facebook')">
+            <div class="social-btn-icon">👥</div>
+            <div class="social-btn-text">
+              <div class="social-btn-title">Facebook Live</div>
+              <div class="social-btn-sub">Connect your Facebook account</div>
+            </div>
+            <span class="social-btn-status status-connect" id="facebook-status">Connect</span>
+          </button>
+
+          <!-- Whatnot (manual — no public API) -->
+          <button class="social-btn whatnot" onclick="toggleWhatnotForm()">
+            <div class="social-btn-icon">🃏</div>
+            <div class="social-btn-text">
+              <div class="social-btn-title">Whatnot</div>
+              <div class="social-btn-sub">Submit your Whatnot profile link</div>
+            </div>
+            <span class="social-btn-status status-connect" id="whatnot-status">Submit</span>
+          </button>
+        </div>
+
+        <!-- Whatnot manual form -->
+        <div class="whatnot-form" id="whatnot-form">
+          <div class="form-group" style="margin-bottom:0">
+            <label for="whatnot-url">Your Whatnot Profile URL</label>
+            <input type="url" id="whatnot-url" placeholder="https://www.whatnot.com/user/yourhandle">
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label for="whatnot-notes">Notes (optional)</label>
+            <input type="text" id="whatnot-notes" placeholder="e.g. I break Pokémon and Sports cards">
+          </div>
+          <button class="btn btn-solid btn-sm" onclick="submitWhatnotRequest()">Submit Whatnot Request</button>
+        </div>
+
+        <p id="connect-error" class="gate-error"></p>
+        <p class="modal-note">TikTok, Instagram, and Facebook use secure OAuth — we never see your password. Whatnot does not offer a public login API, so profile links are reviewed manually.</p>
+      </div>
+
+      <!-- ENTER ACCESS CODE -->
+      <div id="modal-code" class="modal-section">
+        <p style="font-size:.88rem;color:var(--text-muted);line-height:1.7;margin-bottom:1.5rem">Already received your access code? Enter it below to unlock the store. Codes are sent after verification is approved, or given in person at card shows.</p>
+        <div class="form-group"><label for="verify-code">Monthly Access Code</label><input type="text" id="verify-code" placeholder="Enter your code" autocomplete="off" style="text-transform:uppercase;letter-spacing:.1em"></div>
+        <p id="verify-error" class="gate-error"></p>
+        <button class="btn btn-solid" style="width:100%;margin-top:.5rem" onclick="handleVerifyCode()">Unlock Store ♛</button>
+        <p class="modal-note">Codes refresh monthly. Contact us at <a href="mailto:thequeenofcardboard1@gmail.com">thequeenofcardboard1@gmail.com</a> if yours has expired.</p>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="modal-success" class="modal-section">
+        <div class="gate-success-msg">
+          <span class="big-icon">♛</span>
+          <h3>You're Verified!</h3>
+          <p>Welcome! You now have full access to browse and place orders with The Queen of Cardboard Collectibles.</p>
+        </div>
+        <button class="btn btn-solid" style="width:100%;margin-top:1.5rem" onclick="closeModal();document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Browse the Collection ↓</button>
+      </div>
+
+      <div class="stripe-badge"><span>🔒</span> Secured payments powered by Stripe</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header>
+  <nav>
+    <div class="nav-logo">The Queen of Cardboard<span>Collectibles</span></div>
+    <button class="hamburger" onclick="toggleMobileNav()">☰</button>
+    <ul class="nav-links" id="mobile-nav">
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#categories">Categories</a></li>
+      <li><a href="#shop">Shop</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-account-btn" id="account-nav-btn" onclick="handleAccountBtn()">Get Verified</button>
+      <button class="cart-btn" onclick="toggleCart()">🛒 <span class="cart-count" id="cart-count">0</span></button>
+    </div>
+  </nav>
+</header>
+
+<!-- OWNER TOOLBAR -->
+<div class="owner-bar hidden" id="owner-bar">
+  <span class="owner-bar-label">♛ Owner Mode Active</span>
+  <div class="owner-bar-actions">
+    <button class="btn btn-sm" onclick="openManageModal()">📦 Manage Products</button>
+    <button class="btn btn-sm" onclick="openAddProduct()">➕ Add Product</button>
+    <button class="btn btn-sm btn-danger" onclick="ownerLogout()">Sign Out</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>The Queen of Cardboard<em>Collectibles</em></h1>
+  <p class="hero-sub">25+ years of trusted online selling. Premium sealed trading cards for verified breakers and bulk buyers — 100% authentic, every time.</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+    <a href="#shop" class="btn btn-solid">Browse Collection</a>
+    <button class="btn" onclick="openModal()">Get Verified to Purchase</button>
+  </div>
+  <div class="hero-pills">
+    <span class="hero-pill">♛ 25+ Years Online</span>
+    <span class="hero-pill">✦ 100% Authentic &amp; Sealed</span>
+    <span class="hero-pill">✦ Free Shipping Over $500</span>
+    <span class="hero-pill">✦ Verified Buyers Only</span>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-strip-inner">
+    <div class="trust-item"><span>🔒</span> Stripe Secured Payments</div>
+    <div class="trust-item"><span>📦</span> Free Shipping on Orders $500+</div>
+    <div class="trust-item"><span>✅</span> 100% Authentic &amp; Sealed</div>
+    <div class="trust-item"><span>♛</span> Nationwide Card Show Vendor</div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-story">
+      <div class="about-story-text">
+        <h2>Over 25 Years of Passion &amp; Trust</h2>
+        <p><strong>The Queen of Cardboard</strong> has proudly been an online seller for over 25 years. What began as a love for the hobby has grown into one of the most trusted names in the trading card and collectibles community.</p>
+        <p>Beyond online sales, we are an <strong>active vendor at card shows across the United States</strong> — meeting collectors, breakers, and enthusiasts face to face. Our reputation has been built one transaction at a time, on a foundation of authenticity, fair dealing, and genuine passion for the hobby.</p>
+        <p>Every single product we carry is <strong>100% authentic and factory sealed</strong>. We source directly and stand behind everything we sell.</p>
+        <a href="#shop" class="btn btn-solid" style="margin-top:1rem">Shop the Collection</a>
+      </div>
+      <div class="about-stat-box">
+        <div class="stat-row"><div class="stat-num">25+</div><div class="stat-label">Years Selling Online</div></div>
+        <div class="stat-row"><div class="stat-num">50+</div><div class="stat-label">Card Shows Nationwide</div></div>
+        <div class="stat-row"><div class="stat-num">100%</div><div class="stat-label">Authentic &amp; Sealed</div></div>
+      </div>
+    </div>
+    <div class="about-pillars">
+      <div class="pillar"><span class="pillar-icon">♛</span><h4>Verified Buyers Only</h4><p>Connect your TikTok, Instagram, Facebook, or Whatnot to request access. Approved buyers receive a monthly access code.</p></div>
+      <div class="pillar"><span class="pillar-icon">🃏</span><h4>Breaker Friendly</h4><p>We support streamers on TikTok, Whatnot, Facebook Live, Instagram Live, and more.</p></div>
+      <div class="pillar"><span class="pillar-icon">🤝</span><h4>Meet Us at Shows</h4><p>Find us at card shows across the U.S. Verified in person? You'll receive your access code on the spot.</p></div>
+      <div class="pillar"><span class="pillar-icon">🔒</span><h4>Secure Checkout</h4><p>All payments processed through Stripe — the most trusted payment platform in e-commerce.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIPPING & PAYMENT -->
+<section id="shipping-info">
+  <div class="shipping-inner">
+    <div class="shipping-card"><span class="s-icon">📦</span><h4>Free Shipping</h4><p><span class="highlight">Orders over $500</span> ship free anywhere in the United States.</p></div>
+    <div class="shipping-card"><span class="s-icon">🔒</span><h4>Stripe Payments</h4><p>All transactions secured by <span class="highlight">Stripe</span>. Your card data is never stored on our site.</p></div>
+    <div class="shipping-card"><span class="s-icon">✅</span><h4>100% Authentic</h4><p>Every product is <span class="highlight">factory sealed</span>. No reprints, no reseals — guaranteed.</p></div>
+    <div class="shipping-card"><span class="s-icon">📬</span><h4>Order Processing</h4><p>Orders reviewed personally. You'll be contacted within 24–48 hours to confirm and finalize.</p></div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <div class="categories-inner">
+    <h2 class="section-title">What We Carry</h2>
+    <div class="divider"></div>
+    <p class="section-sub">100% authentic &amp; sealed — Pokémon · Sports · Magic · One Piece · &amp; More</p>
+    <div class="cat-grid">
+      <div class="cat-card" onclick="goToShopCategory('pokemon')"><span class="cat-icon">⚡</span><h3>Pokémon TCG</h3><p>Elite Trainer Boxes, Booster Bundles, Poster Collections &amp; more.</p></div>
+      <div class="cat-card" onclick="goToShopCategory('sports')"><span class="cat-icon">🏈</span><h3>Sports Trading Card Boxes</h3><p>NFL, NBA &amp; more. Blasters, mega boxes &amp; hobby boxes.</p></div>
+      <div class="cat-card" onclick="goToShopCategory('mtg')"><span class="cat-icon">🧙</span><h3>Magic: The Gathering</h3><p>Booster displays, set boosters, collector boosters &amp; bundles.</p></div>
+      <div class="cat-card" onclick="goToShopCategory('onepiece')"><span class="cat-icon">☠️</span><h3>One Piece TCG</h3><p>Sealed booster boxes and sets. New inventory arriving soon.</p></div>
+      <div class="cat-card" onclick="goToShopCategory('other')"><span class="cat-icon">✨</span><h3>Other Collectibles</h3><p>Exclusive finds and specialty items. Updated regularly.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="shop-inner">
+    <h2 class="section-title">Our Collection</h2>
+    <div class="divider"></div>
+    <div class="browse-notice" id="browse-notice">
+      <p>You are browsing as a guest. <strong>Connect your streaming account and get verified</strong> to see pricing and place orders. <a href="#" onclick="openModal();return false">Get verified →</a></p>
+    </div>
+    <p class="section-sub">All products 100% authentic &amp; factory sealed &nbsp;·&nbsp; Free shipping on orders $500+</p>
+    <div class="category-tabs">
+      <button class="tab-btn active" onclick="filterProducts('all',this)">All Products</button>
+      <button class="tab-btn" onclick="filterProducts('pokemon',this)">Pokémon TCG</button>
+      <button class="tab-btn" onclick="filterProducts('sports',this)">Sports Cards</button>
+      <button class="tab-btn" onclick="filterProducts('mtg',this)">Magic: The Gathering</button>
+      <button class="tab-btn" onclick="filterProducts('onepiece',this)">One Piece TCG</button>
+      <button class="tab-btn" onclick="filterProducts('other',this)">Other Collectibles</button>
+    </div>
+    <div class="product-grid" id="product-grid"></div>
+  </div>
+</section>
+
+<!-- CART -->
+<div class="cart-overlay-bg" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-header"><h3>♛ Your Order</h3><button class="close-btn" onclick="toggleCart()">✕</button></div>
+  <div class="cart-items-wrap" id="cart-items"><div class="cart-empty"><span>🛒</span>Your cart is empty</div></div>
+  <div class="cart-footer">
+    <div class="cart-shipping-note" id="shipping-note">Add $500+ to qualify for free shipping</div>
+    <div class="cart-total-row"><span>Order Total</span><span class="cart-total-amount" id="cart-total">$0.00</span></div>
+    <button class="btn btn-solid" style="width:100%" onclick="submitOrder()">Submit Order Inquiry</button>
+    <p class="checkout-note">Orders reviewed personally. You'll be contacted to confirm and finalize payment.</p>
+    <div class="stripe-info">🔒 Secured by Stripe</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">The Queen of Cardboard Collectibles</div>
+  <div class="footer-sub">The Queen of Cardboard, LLC &nbsp;·&nbsp; Verified Buyers Only &nbsp;·&nbsp; 25+ Years of Trusted Selling</div>
+  <ul class="footer-links">
+    <li><a href="#about">Our Story</a></li>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#shipping-info">Shipping &amp; Payment</a></li>
+    <li><a href="#" onclick="openModal();return false">Get Verified</a></li>
+    <li><a href="#" onclick="document.getElementById('owner-login-modal').classList.add('open');return false" style="color:#333;font-size:.55rem">Owner</a></li>
+  </ul>
+  <div class="footer-contact">
+    <div class="footer-contact-label">Contact</div>
+    <a href="mailto:thequeenofcardboard1@gmail.com">thequeenofcardboard1@gmail.com</a>
+  </div>
+  <p class="footer-copy">© 2025 The Queen of Cardboard, LLC. All rights reserved. Not affiliated with The Pokémon Company, Panini, Wizards of the Coast, or Bandai.</p>
+  <p style="margin-top:.75rem;font-size:.7rem;color:#444">
+    <a href="#terms" onclick="showLegal('terms')" style="color:#555">Terms of Service</a>
+    &nbsp;·&nbsp;
+    <a href="#privacy" onclick="showLegal('privacy')" style="color:#555">Privacy Policy</a>
+  </p>
+</footer>
+
+<!-- TERMS OF SERVICE -->
+<div id="terms" style="display:none;max-width:800px;margin:0 auto;padding:4rem 2rem">
+  <h1 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:1.8rem;letter-spacing:.08em;margin-bottom:.5rem">Terms of Service</h1>
+  <p style="font-size:.82rem;color:#A0998A;margin-bottom:3rem">Last updated: June 2025</p>
+  <div style="display:flex;flex-direction:column;gap:1.5rem;color:#A0998A;font-size:.95rem;line-height:1.8">
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">1. Acceptance of Terms</h2><p>By accessing or using thequeenofcardboard.com, you agree to be bound by these Terms of Service.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">2. Eligibility</h2><p>This Site is exclusively available to verified breakers and bulk buyers who have connected a streaming platform account or received a monthly access code from The Queen of Cardboard at a card show or event.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">3. Products & Authenticity</h2><p>All products sold through this Site are 100% authentic and factory sealed.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">4. Pricing & Payment</h2><p>All payments are processed securely through Stripe. Orders are confirmed only after payment is received and availability is verified. Free shipping is offered on orders over $500 within the United States.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">5. Returns & Refunds</h2><p>All sales are final unless a product arrives damaged. Please contact us within 48 hours at <a href="mailto:thequeenofcardboard1@gmail.com" style="color:#C9A84C">thequeenofcardboard1@gmail.com</a>.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">6. Access Codes</h2><p>Monthly access codes are personal and non-transferable. Sharing your code may result in permanent revocation of access.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">7. Contact</h2><p><a href="mailto:thequeenofcardboard1@gmail.com" style="color:#C9A84C">thequeenofcardboard1@gmail.com</a></p></div>
+  </div>
+  <button onclick="hideLegal()" class="btn btn-solid" style="margin-top:2rem">← Back to Store</button>
+</div>
+
+<!-- PRIVACY POLICY -->
+<div id="privacy" style="display:none;max-width:800px;margin:0 auto;padding:4rem 2rem">
+  <h1 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:1.8rem;letter-spacing:.08em;margin-bottom:.5rem">Privacy Policy</h1>
+  <p style="font-size:.82rem;color:#A0998A;margin-bottom:3rem">Last updated: June 2025</p>
+  <div style="display:flex;flex-direction:column;gap:1.5rem;color:#A0998A;font-size:.95rem;line-height:1.8">
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">1. Information We Collect</h2><p>We collect your name, email address, and public social media profile information (username, profile URL, follower count) when you connect a platform for verification.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">2. How We Use Your Information</h2><p>We use your information to verify your identity as a breaker or bulk buyer, process orders, and contact you about your account or access code.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">3. Social Media Data</h2><p>When you connect TikTok, Instagram, or Facebook, we receive only your basic public profile data through their official OAuth systems. We do not access private messages, contacts, or passwords, and we never post on your behalf.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">4. Data Sharing</h2><p>We do not sell your personal information. We share data only with Stripe for payment processing, and as required by law.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">5. Data Security</h2><p>All payments are processed through Stripe, which is PCI-DSS compliant. We do not store your payment card information.</p></div>
+    <div><h2 style="font-family:'Cinzel',serif;color:#C9A84C;font-size:.9rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid #2E2E2E">6. Contact</h2><p><a href="mailto:thequeenofcardboard1@gmail.com" style="color:#C9A84C">thequeenofcardboard1@gmail.com</a></p></div>
+  </div>
+  <button onclick="hideLegal()" class="btn btn-solid" style="margin-top:2rem">← Back to Store</button>
+</div>
+
+<script>
+function showLegal(page){
+  document.querySelector('.hero').style.display='none';
+  document.querySelector('.trust-strip').style.display='none';
+  document.getElementById('about').style.display='none';
+  document.getElementById('shipping-info').style.display='none';
+  document.getElementById('categories').style.display='none';
+  document.getElementById('shop').style.display='none';
+  document.querySelector('footer').style.display='none';
+  document.getElementById('terms').style.display='none';
+  document.getElementById('privacy').style.display='none';
+  document.getElementById(page).style.display='block';
+  window.scrollTo(0,0);
+}
+function hideLegal(){
+  document.querySelector('.hero').style.display='';
+  document.querySelector('.trust-strip').style.display='';
+  document.getElementById('about').style.display='';
+  document.getElementById('shipping-info').style.display='';
+  document.getElementById('categories').style.display='';
+  document.getElementById('shop').style.display='';
+  document.querySelector('footer').style.display='';
+  document.getElementById('terms').style.display='none';
+  document.getElementById('privacy').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+
+<div class="toast" id="toast"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+/* ── STATE ─────────────────────────────────────── */
+let PRODUCTS = [];
+let cart = [];
+let verified = false;
+let isOwner = false;
+let currentFilter = 'all';
+let userAccount = null;
+let editingProductId = null;
+
+/* ── STORAGE ────────────────────────────────────── */
+function saveProducts(){ try{ localStorage.setItem('qoc_products', JSON.stringify(PRODUCTS)); }catch(e){} }
+function loadProducts(){
+  try{ const s=localStorage.getItem('qoc_products'); if(s){ PRODUCTS=JSON.parse(s); return; } }catch(e){}
+  PRODUCTS = JSON.parse(JSON.stringify(DEFAULT_PRODUCTS));
+  saveProducts();
+}
+function checkOwnerSession(){ try{ return localStorage.getItem('qoc_owner')==='true'; }catch(e){ return false; } }
+function setOwnerSession(v){ try{ v ? localStorage.setItem('qoc_owner','true') : localStorage.removeItem('qoc_owner'); }catch(e){} }
+
+/* ── INIT ───────────────────────────────────────── */
+loadProducts();
+if(checkOwnerSession()) activateOwnerMode();
+checkOAuthReturn();   // check if we just came back from TikTok/Meta
+renderProducts();
+
+/* ── CHECK OAUTH RETURN ─────────────────────────── */
+function checkOAuthReturn(){
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('verify_status');
+  if(!status) return;
+  // Clean the URL
+  window.history.replaceState({}, document.title, window.location.pathname);
+
+  const platform = params.get('platform') || '';
+  const name     = params.get('name') || '';
+  const profile  = params.get('profile') || '';
+  const ig       = params.get('ig') || '';
+
+  const box = document.getElementById('connect-status-box');
+
+  if(status === 'pending'){
+    box.style.display = 'block';
+    const igLine = ig ? `<br>Instagram: <strong>@${ig}</strong>` : '';
+    box.innerHTML = `<div class="verify-status-box pending">
+      ✅ <strong>Verification request submitted!</strong><br>
+      Platform: <strong>${platformLabel(platform)}</strong> — ${name}${igLine}<br>
+      The Queen of Cardboard will review your account and email you an access code within 1–2 business days.
+    </div>`;
+    openModal();
+    switchModalTab('connect', document.querySelector('.modal-tab'));
+    // Mark the connected platform
+    markPlatformConnected(platform);
+  } else if(status === 'denied'){
+    box.style.display = 'block';
+    box.innerHTML = `<div class="verify-status-box error">❌ You declined to connect ${platformLabel(platform)}. You can try again or connect a different platform.</div>`;
+    openModal();
+  } else if(status === 'error'){
+    box.style.display = 'block';
+    box.innerHTML = `<div class="verify-status-box error">⚠ Something went wrong during verification. Please try again or contact us at <a href="mailto:thequeenofcardboard1@gmail.com">thequeenofcardboard1@gmail.com</a>.</div>`;
+    openModal();
+  }
+}
+
+function platformLabel(p){
+  const map = {tiktok:'TikTok',facebook:'Facebook',instagram:'Instagram',facebook_instagram:'Facebook + Instagram',meta:'Facebook + Instagram'};
+  return map[p] || p;
+}
+
+function markPlatformConnected(platform){
+  if(platform==='tiktok'){ setStatus('tiktok-status','Pending ⏳','status-pending'); }
+  if(platform==='facebook'||platform==='meta'||platform==='facebook_instagram'){
+    setStatus('facebook-status','Pending ⏳','status-pending');
+    setStatus('instagram-status','Pending ⏳','status-pending');
+  }
+  if(platform==='instagram'){ setStatus('instagram-status','Pending ⏳','status-pending'); }
+}
+function setStatus(id, text, cls){
+  const el = document.getElementById(id);
+  if(!el) return;
+  el.textContent = text;
+  el.className = 'social-btn-status ' + cls;
+}
+
+/* ── OAUTH REDIRECTS ────────────────────────────── */
+function connectTikTok(){
+  // Store user info temporarily so we can include it in the request
+  const name  = document.getElementById('buyer-name-connect').value.trim();
+  const email = document.getElementById('buyer-email-connect').value.trim();
+  if(!name || !email){ showConnectError('Please enter your name and email before connecting.'); return; }
+  sessionStorage.setItem('buyer_name', name);
+  sessionStorage.setItem('buyer_email', email);
+  // Redirect to the Netlify function that starts TikTok OAuth
+  window.location.href = '/.netlify/functions/auth-tiktok';
+}
+
+function connectMeta(platform){
+  const name  = document.getElementById('buyer-name-connect').value.trim();
+  const email = document.getElementById('buyer-email-connect').value.trim();
+  if(!name || !email){ showConnectError('Please enter your name and email before connecting.'); return; }
+  sessionStorage.setItem('buyer_name', name);
+  sessionStorage.setItem('buyer_email', email);
+  sessionStorage.setItem('meta_platform', platform);
+  // Redirect to the Netlify function that starts Meta OAuth
+  window.location.href = '/.netlify/functions/auth-meta';
+}
+
+function showConnectError(msg){
+  const el = document.getElementById('connect-error');
+  el.textContent = '❌ ' + msg;
+  el.style.display = 'block';
+  setTimeout(()=>{ el.style.display='none'; }, 4000);
+}
+
+/* ── WHATNOT MANUAL FORM ────────────────────────── */
+function toggleWhatnotForm(){
+  const form = document.getElementById('whatnot-form');
+  form.classList.toggle('open');
+}
+
+async function submitWhatnotRequest(){
+  const name  = document.getElementById('buyer-name-connect').value.trim();
+  const email = document.getElementById('buyer-email-connect').value.trim();
+  const url   = document.getElementById('whatnot-url').value.trim();
+  const notes = document.getElementById('whatnot-notes').value.trim();
+
+  if(!name || !email){ showConnectError('Please enter your name and email first.'); return; }
+  if(!url){ showConnectError('Please enter your Whatnot profile URL.'); return; }
+  if(!url.includes('whatnot.com')){ showConnectError('Please enter a valid whatnot.com URL.'); return; }
+
+  const btn = document.querySelector('#whatnot-form .btn');
+  btn.textContent = 'Submitting...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/verify-whatnot', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, whatnotUrl: url, extraNotes: notes })
+    });
+    const data = await res.json();
+
+    if(data.success){
+      setStatus('whatnot-status','Pending ⏳','status-pending');
+      document.getElementById('whatnot-form').classList.remove('open');
+      const box = document.getElementById('connect-status-box');
+      box.style.display = 'block';
+      box.innerHTML = `<div class="verify-status-box pending">✅ <strong>Whatnot request submitted!</strong><br>${data.message}</div>`;
+      showToast('Whatnot request submitted ✓');
+    } else {
+      showConnectError(data.error || 'Submission failed. Please try again.');
+    }
+  } catch(e){
+    showConnectError('Network error. Please try again.');
+  }
+
+  btn.textContent = 'Submit Whatnot Request';
+  btn.disabled = false;
+}
+
+/* ── ACCESS CODE ────────────────────────────────── */
+function handleVerifyCode(){
+  const code = document.getElementById('verify-code').value.trim().toUpperCase();
+  const err  = document.getElementById('verify-error');
+  if(code !== ACCESS_CODE){ err.style.display='block'; err.textContent='❌ Incorrect code. Please try again.'; return; }
+  err.style.display='none';
+  verified = true;
+  document.getElementById('browse-notice').classList.add('hidden');
+  document.getElementById('modal-tabs').style.display='none';
+  document.querySelectorAll('.modal-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('modal-success').classList.add('active');
+  document.getElementById('account-nav-btn').textContent='✓ Verified';
+  renderProducts();
+  showToast('✓ Access granted — welcome!');
+}
+document.getElementById('verify-code').addEventListener('input',function(){ this.value=this.value.toUpperCase(); });
+
+/* ── OWNER LOGIN ────────────────────────────────── */
+function ownerLogin(){
+  const pw  = document.getElementById('owner-pw').value;
+  const err = document.getElementById('owner-pw-error');
+  if(pw === OWNER_PASSWORD){
+    err.style.display='none';
+    document.getElementById('owner-login-modal').classList.remove('open');
+    document.getElementById('owner-pw').value='';
+    setOwnerSession(true);
+    activateOwnerMode();
+    showToast('♛ Owner Mode active.');
+  } else { err.style.display='block'; }
+}
+function activateOwnerMode(){
+  isOwner=true; verified=true;
+  document.getElementById('owner-bar').classList.remove('hidden');
+  document.getElementById('account-nav-btn').textContent='♛ Owner';
+  document.getElementById('browse-notice').classList.add('hidden');
+  renderProducts();
+}
+function ownerLogout(){
+  isOwner=false; verified=false;
+  setOwnerSession(false);
+  document.getElementById('owner-bar').classList.add('hidden');
+  document.getElementById('account-nav-btn').textContent='Get Verified';
+  document.getElementById('browse-notice').classList.remove('hidden');
+  renderProducts();
+  showToast('Signed out of owner mode.');
+}
+document.getElementById('owner-pw').addEventListener('keydown',e=>{ if(e.key==='Enter') ownerLogin(); });
+
+/* ── MANAGE PRODUCTS ────────────────────────────── */
+function openManageModal(){
+  document.getElementById('manage-modal').classList.add('open');
+  renderManageList();
+}
+function renderManageList(){
+  const q = document.getElementById('manage-search').value.toLowerCase();
+  const list = PRODUCTS.filter(p=>!q||p.name.toLowerCase().includes(q));
+  const el = document.getElementById('manage-product-list');
+  if(!list.length){ el.innerHTML='<p style="color:var(--text-muted);font-size:.85rem;padding:1rem 0">No products found.</p>'; return; }
+  el.innerHTML = list.map(p=>`
+    <div class="product-list-item" onclick="openEditProduct('${p.id}')">
+      <div class="pli-img">${p.image?`<img src="${p.image}" alt="">`:'♛'}</div>
+      <div class="pli-info">
+        <div class="pli-name">${p.name}</div>
+        <div class="pli-meta">${CATEGORY_LABELS[p.category]||p.category} · ${p.price!==null?'$'+p.price:'No price'} · <span style="color:${p.inStock?'#7EC87E':'#E07070'}">${p.inStock?'In Stock':'Out of Stock'}</span></div>
+      </div>
+      <button class="btn btn-sm" onclick="event.stopPropagation();openEditProduct('${p.id}')">Edit</button>
+    </div>`).join('');
+}
+
+/* ── ADD / EDIT PRODUCT ─────────────────────────── */
+function openAddProduct(){
+  editingProductId=null;
+  document.getElementById('edit-modal-title').textContent='♛ Add New Product';
+  ['ep-name','ep-desc','ep-price'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('ep-cat').value='pokemon';
+  document.getElementById('ep-badge').value='';
+  document.getElementById('ep-instock').checked=true;
+  document.getElementById('ep-image-data').value='';
+  document.getElementById('ep-img-preview').innerHTML='<span style="opacity:.4">♛</span>&nbsp;No image yet';
+  document.getElementById('ep-delete-btn').style.display='none';
+  document.getElementById('ep-error').style.display='none';
+  document.getElementById('manage-modal').classList.remove('open');
+  document.getElementById('edit-product-modal').classList.add('open');
+}
+function openEditProduct(id){
+  const p=PRODUCTS.find(x=>x.id===id); if(!p) return;
+  editingProductId=id;
+  document.getElementById('edit-modal-title').textContent='♛ Edit Product';
+  document.getElementById('ep-name').value=p.name;
+  document.getElementById('ep-desc').value=p.desc||'';
+  document.getElementById('ep-price').value=p.price!==null?p.price:'';
+  document.getElementById('ep-cat').value=p.category;
+  document.getElementById('ep-badge').value=p.badge||'';
+  document.getElementById('ep-instock').checked=p.inStock;
+  document.getElementById('ep-image-data').value=p.image||'';
+  document.getElementById('ep-img-preview').innerHTML=p.image?`<img src="${p.image}" alt="">`:'<span style="opacity:.4">♛</span>&nbsp;No image yet';
+  document.getElementById('ep-delete-btn').style.display='inline-block';
+  document.getElementById('ep-error').style.display='none';
+  document.getElementById('manage-modal').classList.remove('open');
+  document.getElementById('edit-product-modal').classList.add('open');
+}
+function closeEditModal(){ document.getElementById('edit-product-modal').classList.remove('open'); editingProductId=null; }
+function saveProduct(){
+  const name=document.getElementById('ep-name').value.trim();
+  const err=document.getElementById('ep-error');
+  if(!name){ err.style.display='block'; err.textContent='❌ Product name is required.'; return; }
+  const priceVal=document.getElementById('ep-price').value.trim();
+  const product={
+    id: editingProductId||('prod-'+Date.now()),
+    category: document.getElementById('ep-cat').value,
+    name, desc: document.getElementById('ep-desc').value.trim(),
+    price: priceVal!==''?parseFloat(priceVal):null,
+    image: document.getElementById('ep-image-data').value||'',
+    badge: document.getElementById('ep-badge').value,
+    inStock: document.getElementById('ep-instock').checked
+  };
+  if(editingProductId){ const i=PRODUCTS.findIndex(p=>p.id===editingProductId); if(i!==-1) PRODUCTS[i]=product; }
+  else PRODUCTS.push(product);
+  saveProducts(); renderProducts(); closeEditModal();
+  showToast(editingProductId?'✓ Product updated!':'✓ Product added!');
+}
+function deleteProduct(){
+  if(!editingProductId||!confirm('Delete this product? This cannot be undone.')) return;
+  PRODUCTS=PRODUCTS.filter(p=>p.id!==editingProductId);
+  saveProducts(); renderProducts(); closeEditModal();
+  showToast('Product deleted.');
+}
+
+/* ── IMAGE HANDLING ─────────────────────────────── */
+function handleImageUpload(event){
+  const file=event.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    document.getElementById('ep-image-data').value=e.target.result;
+    document.getElementById('ep-img-preview').innerHTML=`<img src="${e.target.result}" alt="">`;
+  };
+  reader.readAsDataURL(file);
+}
+function pasteImageUrl(){
+  const url=prompt('Paste an image URL:'); if(!url) return;
+  document.getElementById('ep-image-data').value=url;
+  document.getElementById('ep-img-preview').innerHTML=`<img src="${url}" alt="" onerror="this.parentElement.innerHTML='<span style=\\'opacity:.4\\'>♛</span>&nbsp;Image failed'">`;
+}
+function clearImage(){
+  document.getElementById('ep-image-data').value='';
+  document.getElementById('ep-img-preview').innerHTML='<span style="opacity:.4">♛</span>&nbsp;No image yet';
+  document.getElementById('ep-img-file').value='';
+}
+
+/* ── PRODUCT RENDERING ──────────────────────────── */
+function renderProducts(){
+  const grid=document.getElementById('product-grid');
+  const list=currentFilter==='all'?PRODUCTS:PRODUCTS.filter(p=>p.category===currentFilter);
+  if(!list.length){ grid.innerHTML=`<p style="color:var(--text-muted);font-size:.9rem;text-align:center;grid-column:1/-1;padding:3rem 0">No products in this category yet — check back soon!</p>`; return; }
+  grid.innerHTML=list.map(p=>{
+    const priceDisplay=(verified||isOwner)?(p.price!==null?`$${Number(p.price).toFixed(2)}`:'Contact for Pricing'):'<span style="filter:blur(5px);user-select:none">$••••</span>';
+    const editBtn=isOwner?`<button class="owner-edit-btn" onclick="openEditProduct('${p.id}')">✏ Edit Product</button>`:'';
+    let footerBtn='';
+    if(!p.inStock) footerBtn=`<span style="font-size:.72rem;color:var(--text-muted);font-family:var(--font-d);letter-spacing:.1em">Coming Soon</span>`;
+    else if(verified||isOwner) footerBtn=`<button class="add-to-cart" onclick="addToCart('${p.id}')">Add to Order</button>`;
+    else footerBtn=`<button class="add-to-cart locked" onclick="openModal()">🔒 Get Verified</button>`;
+    return `<div class="product-card">
+      ${p.badge&&p.inStock?`<span class="badge-new">${p.badge}</span>`:''}
+      ${!p.inStock?`<span class="badge-sold">Coming Soon</span>`:''}
+      ${p.image?`<img src="${p.image}" alt="${p.name}" class="product-img" loading="lazy" onerror="this.style.display='none'">`:`<div class="product-img-placeholder"><span>♛</span>Photo Coming Soon</div>`}
+      <div class="product-body">
+        <div class="product-category">${CATEGORY_LABELS[p.category]||p.category}</div>
+        <div class="product-name">${p.name}</div>
+        ${p.desc?`<div class="product-desc">${p.desc}</div>`:''}
+        <div style="font-family:var(--font-d);font-size:.55rem;letter-spacing:.15em;color:var(--gold-dark);margin-bottom:.75rem;text-transform:uppercase">✅ Authentic &amp; Sealed</div>
+        <div class="product-footer">
+          <div class="product-price"><small>Price</small>${priceDisplay}</div>
+          ${footerBtn}
+        </div>
+      </div>
+      ${editBtn}
+    </div>`;
+  }).join('');
+}
+function filterProducts(cat,btn){
+  currentFilter=cat;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts();
+}
+
+/* ── MODAL HELPERS ──────────────────────────────── */
+function openModal(){ document.getElementById('account-modal').classList.add('open'); }
+function closeModal(){ document.getElementById('account-modal').classList.remove('open'); }
+document.getElementById('account-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('account-modal')) closeModal(); });
+function switchModalTab(tab,btn){
+  document.querySelectorAll('.modal-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.modal-section').forEach(s=>s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('modal-'+tab).classList.add('active');
+}
+function handleAccountBtn(){ if(!isOwner) openModal(); }
+function toggleMobileNav(){ document.getElementById('mobile-nav').classList.toggle('open'); }
+function goToShopCategory(cat){
+  document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+  setTimeout(()=>{
+    const tabs=document.querySelectorAll('.category-tabs .tab-btn');
+    const idx={pokemon:1,sports:2,mtg:3,onepiece:4,other:5};
+    if(tabs[idx[cat]]) filterProducts(cat,tabs[idx[cat]]);
+  },400);
+}
+
+/* ── CART ───────────────────────────────────────── */
+function addToCart(id){
+  if(!verified&&!isOwner){ openModal(); return; }
+  const p=PRODUCTS.find(x=>x.id===id); if(!p) return;
+  const ex=cart.find(i=>i.id===id);
+  if(ex) ex.qty++; else cart.push({id,name:p.name,price:p.price,qty:1});
+  updateCartUI(); showToast('Added to order ✓');
+}
+function updateCartCount(){ document.getElementById('cart-count').textContent=cart.reduce((s,i)=>s+i.qty,0); }
+function updateCartUI(){
+  updateCartCount();
+  const el=document.getElementById('cart-items');
+  if(!cart.length){ el.innerHTML='<div class="cart-empty"><span>🛒</span>Your cart is empty</div>'; document.getElementById('cart-total').textContent='$0.00'; document.getElementById('shipping-note').textContent='Add $500+ to qualify for free shipping'; return; }
+  let total=0,allPriced=true;
+  el.innerHTML=cart.map(item=>{
+    const lt=item.price?item.price*item.qty:null;
+    if(lt) total+=lt; else allPriced=false;
+    return `<div class="cart-item">
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${item.price?'$'+(item.price*item.qty).toFixed(2):'Price TBD'}</div>
+        <div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
+          <span class="qty-display">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
+        </div>
+      </div>
+      <button class="remove-item" onclick="removeFromCart('${item.id}')">✕</button>
+    </div>`;
+  }).join('');
+  document.getElementById('cart-total').textContent=allPriced?`$${total.toFixed(2)}`:`$${total.toFixed(2)} + TBD`;
+  const note=document.getElementById('shipping-note');
+  note.textContent=total>=500?'✓ Free shipping applied!':'Add $'+(500-total).toFixed(2)+' more for free shipping';
+}
+function changeQty(id,d){ const i=cart.find(x=>x.id===id); if(!i) return; i.qty=Math.max(1,i.qty+d); updateCartUI(); }
+function removeFromCart(id){ cart=cart.filter(i=>i.id!==id); updateCartUI(); }
+function toggleCart(){ document.getElementById('cart-overlay').classList.toggle('open'); document.getElementById('cart-drawer').classList.toggle('open'); updateCartUI(); }
+function submitOrder(){
+  if(!verified&&!isOwner){ toggleCart(); openModal(); return; }
+  if(!cart.length){ showToast('Your order is empty'); return; }
+  const lines=cart.map(i=>`• ${i.qty}x ${i.name} — ${i.price?'$'+(i.price*i.qty).toFixed(2):'Price TBD'}`).join('\n');
+  const subject=encodeURIComponent('Order Inquiry – The Queen of Cardboard Collectibles');
+  const body=encodeURIComponent(`Hello,\n\nOrder inquiry:\n\n${lines}\n\nThank you!`);
+  window.location.href=`mailto:thequeenofcardboard1@gmail.com?subject=${subject}&body=${body}`;
+}
+
+/* ── TOAST ──────────────────────────────────────── */
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2800); }
+</script>
+</body>
+</html>
